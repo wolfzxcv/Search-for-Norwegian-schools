@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars, faThumbtack, faHashtag, faAppleAlt, faCube, faArrowUp} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import CountyOption from './components/CountyOption'
 import Left from './components/Left'
 import List from './components/List'
 
@@ -78,6 +77,10 @@ const App = ({className}) => {
   const resultArr = mergeData.filter( x=> select.includes(x.Navn))
   console.log(resultArr)
 
+  const handleChange = value =>{
+    setSelect(value)
+  }
+
 
   return (
   <div className={className}>
@@ -113,17 +116,7 @@ const App = ({className}) => {
              onChange={ e=> setInput(e.target.value)}
       />
       <div>SØK</div>
-      </div>
-          <select value={select} onChange={e => setSelect(e.target.value)} >
-          <option value='please select a county' disabled>please select a county</option>
-          {getCounty.map( (option, idx) => 
-          <CountyOption 
-          key={idx}
-          value={option}
-          select={option}         
-          />)}
-          </select>  
-    
+      </div>  
     </div>
 
     <div className='fake-button'>
@@ -139,7 +132,8 @@ const App = ({className}) => {
     <Left
     key={idx}
     value={option}
-    select={option}  
+    select={option}
+    handleChange={handleChange}  
     />)}
     </div>
    
@@ -147,11 +141,12 @@ const App = ({className}) => {
      {resultArr.map( list =>
      <List
      key={list.OrgNr}
+     id={list.OrgNr}
      countyName={list.Navn}
      fullname={list.FulltNavn} 
      email={list.Epost.length ===0 ? 'N/A' : (list.Epost)}
-     type={list.Karakteristikk.length ===0 ? 'N/A' : (list.Karakteristikk)}
-     publicSchool={list.ErOffentligSkole ? 'Public': 'Private'}
+     character={list.Karakteristikk.length ===0 ? 'N/A' : (list.Karakteristikk)}
+     type={list.ErOffentligSkole ? 'Public': 'Private'}
      basic={list.ErGrunnSkole ? 'True' : 'False'}
      />)}
      </div>
@@ -333,7 +328,8 @@ header{
   display: flex;
 
   div{
-    width: 100%;
+    width: 1170px;
+    margin: 0 auto;
     display: flex;  
     justify-content: center;
 
@@ -403,24 +399,21 @@ header{
 }
 
 .content-left-right{
-  margin: 25px auto;
-  width: 1200px;
+  width: 1500px;
+  margin: 50px auto;
   display: flex;
 
-  div{
-  border: 1px solid red;
-  }
-
-  .left{
+  .left{    
+  width: 18%;  
   display: flex;
   flex-direction: column;
   }
 
   .right{
-  width: 1200px;
+  width: 82%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
   }
 }
 

@@ -2,16 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const List = ({className, countyName, fullname, email, type, publicSchool, basic}) => {
+const black = '#404040'
+
+
+const List = ({className, id, countyName, fullname, email, character, type, basic}) => {
   return (
     <div className={className}>
 
-    <div>{countyName}</div>
-    <div className='school'>School Name: {fullname}</div>
+    <div className='countyName'>{countyName}</div>
+    <div>School Name: {fullname}</div>
     <div>E-mail: {email}</div>
+    <div>Character: {character}</div>
     <div>Type: {type}</div>
-    <div>Public: {publicSchool}</div>
-    <div>Bsic: {basic}</div>
+    <div>Basic: {basic}</div>
 
     </div>
   )
@@ -23,20 +26,22 @@ List.propTypes = {
 
 const StyledList = styled(List)`
   box-sizing: border-box;
-  width: 320px;
-  height: 180px;
-  margin: 10px;
+  width: 350px;
+  height: 200px;
+  margin: 0 10px 20px 10px;
   padding: 5px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 3px 2px rgba(0,0,0,0.20);
-  
+  box-shadow: 0 2px 3px 3px rgba(0,0,0,0.20);
+  background-color: #FFFFF0;
+  font-size: 16px;
+  color: ${black};
+  line-height: 1.5;
 
-.school{
-  display: flex;
-  flex-wrap: wrap;
+.countyName{
+  font-size: 20px; 
+  color: #330000;
 }
-
 
 `
 
