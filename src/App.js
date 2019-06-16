@@ -1,46 +1,61 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import CountyOption from './CountyOption'
+
 
 const App = ({className}) => {
   const [data, setData] = useState([])  
-  const [fylkeNr, setFylkeNr] = useState('')
+  const [county, setCounty] = useState([]) 
+  const [select, setSelect] = useState('')
 
   useEffect( () =>{      
     async function fetchData(){
     const response = await fetch('https://data-nsr.udir.no/enheter')
     const result = await response.json()
     setData(result)     
+  } 
+    async function fetchCountyName(){
+    const response = await fetch('https://data-nsr.udir.no/fylker')
+    const result = await response.json()
+    setCounty(result)
   }
     fetchData()
+    fetchCountyName()
 },[])
 
-  console.log(data,'got '+data.length+' data')
 
-  const filterArr = data.filter( x => fylkeNr.includes(x.FylkeNr))
-  console.log(filterArr)
+  const mergeData = data.map( A => {
+    const finder = county.find( B => A.FylkeNr === B.Fylkesnr) || {};
+    A.Navn = finder.Navn || '';
+    return A;
+  })
+  console.log(mergeData,'got '+mergeData.length+' data')  
+    
 
-  const filterFylkeNrAmount = data.reduce( (eachData, fylkeNr) => {
-    eachData[fylkeNr.FylkeNr] = 0  
-   return eachData   },{})
+  const filterCountyList = mergeData.reduce( (eachData, countyName) => {
+        eachData[countyName.Navn] = countyName.FylkeNr  
+  return eachData},[])
+  console.log(`county name: ISO-code`, filterCountyList.sort())
 
-  const getFylkeNr = Object.keys(filterFylkeNrAmount).sort( (a,b) => a-b)
-  console.log(getFylkeNr)
+  
+  const getCounty = Object.keys(filterCountyList).sort()
 
-  const warning = e =>{
-    setFylkeNr( e.target.value); 
-    if(fylkeNr<51){
-      return null
-    }else{
-      alert('please enter a number between 01-50');
-      setFylkeNr('')}
-  }
 
   return (
-    <div className={className}>
-    <a name="top"></a>
-    <input value={fylkeNr} onChange={ e =>warning(e) } />
-    </div>
+  <div className={className}>
+  <a name="top"></a>
+
+    <select value={select} onChange={e => setSelect(e.target.value)} >
+      <option value='please select a county' disabled>please select a county</option>
+      {getCounty.map( (option, idx) => 
+      <CountyOption 
+      key={idx}
+      value={option}
+      select={option}         
+      />)}
+    </select>  
+  </div>
  )
 }
 
