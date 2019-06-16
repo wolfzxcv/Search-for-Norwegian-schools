@@ -1,14 +1,45 @@
 import React, {useState, useEffect} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars, faThumbtack, faHashtag, faAppleAlt, faCube} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import CountyOption from './CountyOption'
-import List from './List'
+import CountyOption from './components/CountyOption'
+import Left from './components/Left'
+import List from './components/List'
+
+//color
+const green = '#00AA50'
+const darkGreen = '#00803C'
+const borderGray = '#C2C2A3'
+const headerWhite = '#FAFAF7'
+const black = '#404040'
+const backgroundGray = '#F5F5EF'
+const footerBlack = '#2D3340'
+const footerGray = '#CDCDCD'
+ 
+//font-awesome
+const map = <FontAwesomeIcon icon={faMapMarkerAlt} />
+const fork = <FontAwesomeIcon icon={faUtensils} />
+const leaf = <FontAwesomeIcon icon={faLeaf} />
+const lock = <FontAwesomeIcon icon={faUnlockAlt} />
+const user = <FontAwesomeIcon icon={faUser} />
+const search = <FontAwesomeIcon icon={faSearch} />
+const bars = <FontAwesomeIcon icon={faBars} />
+const location = <FontAwesomeIcon icon={faThumbtack} />
+const hashtag = <FontAwesomeIcon icon={faHashtag} />
+const appleAlt = <FontAwesomeIcon icon={faAppleAlt} />
+const cube = <FontAwesomeIcon icon={faCube} />
+
+//images
+const apple = require('../src/images/apple.png')
+const google = require('../src/images/google.png')
 
 
 const App = ({className}) => {
   const [data, setData] = useState([])  
   const [county, setCounty] = useState([]) 
-  const [select, setSelect] = useState('please select a county')
+  const [input, setInput] = useState('')
+  const [select, setSelect] = useState('Choose a county')
 
   useEffect( () =>{      
     async function fetchData(){
@@ -42,7 +73,6 @@ const App = ({className}) => {
 
   const getCounty = Object.keys(filterCountyList).sort()
 
-
   //print out each county's school info
   const resultArr = mergeData.filter( x=> select.includes(x.Navn))
   console.log(resultArr)
@@ -50,24 +80,72 @@ const App = ({className}) => {
 
   return (
   <div className={className}>
-  <a name="top"></a>
+  
 
-    
-    <h1 className='show-title'>{select}</h1> 
-    <hr/>
+    <header>
+    <a name="top"></a> 
+    <div className='title normal'>{select}</div> 
 
+
+
+    <div className='three normal'>
+      <div className='underline'>{map}FINN  BUTIKK</div>
+      <div>{fork}OPPSKRIFTER</div>
+      <div>{leaf}VÅRT  ANSVAR</div>  
+    </div> 
+
+
+    <div className='member small'>
+      <div>{lock}<span>Logg  inn</span></div>
+      <div>{user}<span>Bli  Norge  PLUSS-kunde</span></div>
+    </div>
+
+    <div className='green normal'>
+      <div>{search}</div>
+      <div>{bars}</div>
+    </div>
+
+    </header>
+
+    <div className='search'>
+
+      <div>
+      <input type="text" value={input} 
+             placeholder='Skolens navn'
+             onChange={ e=> setInput(e.target.value)}
+      />
+      <div>SØK</div>
+      </div>
+          <select value={select} onChange={e => setSelect(e.target.value)} >
+          <option value='please select a county' disabled>please select a county</option>
+          {getCounty.map( (option, idx) => 
+          <CountyOption 
+          key={idx}
+          value={option}
+          select={option}         
+          />)}
+          </select>  
     
-    <select value={select} onChange={e => setSelect(e.target.value)} >
-      <option value='please select a county' disabled>please select a county</option>
-      {getCounty.map( (option, idx) => 
-      <CountyOption 
-      key={idx}
-      value={option}
-      select={option}         
-      />)}
-    </select>  
-    
-    <div className='list-container'>
+    </div>
+
+    <div className='fake-button'>
+      <div className='button1'>ALLE BUTIKKER</div>
+      <div className='button'>SØNDAGSÅPNE BUTIKKER</div>
+      <div className='button'>KVELDSÅPNE TIL 23:00</div>
+      <div className='button4'>{location}MIN POSISJON</div>
+    </div>
+
+    <div className='content-left-right'>
+    <div className='left'>
+    {getCounty.map( (option, idx) => 
+    <Left
+    key={idx}
+    value={option}
+    select={option}  
+    />)}
+    </div>
+   
+    <div className='right'>
      {resultArr.map( list =>
      <List
      key={list.OrgNr}
@@ -79,6 +157,64 @@ const App = ({className}) => {
      basic={list.ErGrunnSkole ? 'True' : 'False'}
      />)}
      </div>
+    </div>
+
+ 
+    <div className='jobbe'><u>Interessert i å jobbe i Norge? Se våre ledige stillinger <b>her</b>.</u></div>
+
+    <footer>
+      <div className='footer'>
+        <div>
+          <div className='footer-title'>Norge</div>
+          <div className='om-norge'>
+            <div>Om Norge>></div>
+            <div>Like Norge>></div>
+            <div>Reise til Norge>></div>
+            <div>Bo i Norge>></div>
+            <div>Fordi norge er verdig vakkert>></div>
+          </div>
+        </div>
+
+        <div>
+          <div className='footer-title'>Kontakt oss</div>
+            <div className='kontakt'>
+              <p>Lorem ipsum dolor</p>
+              <p>Lorem ipsum dolor sit amet</p>
+              <p>Lorem ipsum dolor</p>
+              <p>Telefon: <span>12345678</span></p>  
+            </div>
+            <div className='kontakt'>
+              <p>Lorem ipsum Norge</p>
+              <p>1234 Lorem</p>
+              <p>Postboks 567</p>
+              <p>Telefon: <span>12345678</span></p>  
+            </div>
+            <div className='kontakt-oss'>
+              Kontakt oss>>
+            </div> 
+        </div>
+
+        <div>
+          <div className='footer-title'>Norge liker deg app</div>
+            <div className='app-text'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit Libero fugiat Aperiam impedit velit odit!
+            </div>  
+            <div className='apple'><img src={apple} /></div>
+            <div className='google'><img src={google} /></div>          
+        </div>
+
+        <div>
+          <div className='footer-title'>Følg oss</div>
+          <div className='follow'>Følg oss på sosiale medier!</div>
+          <div className='icon'>
+            <div>{hashtag}</div>
+            <div>{appleAlt}</div>
+            <div>{cube}</div>
+          </div>
+        </div>
+  
+      </div> 
+    </footer>
 
   </div>
  )
@@ -89,15 +225,325 @@ App.propTypes = {
 }
 
 const StyledApp = styled(App)` 
+font-family: sans-serif;
+
+header{
+  width: 100vw;
+  height: 79px;
+  display: flex;
+  flex: 1;
+  color: ${black};
+  font-weight: 100;
+  border-bottom: 1px solid ${borderGray};
+
+    .title{
+      background-color: ${headerWhite};
+      padding: 0 50px;
+      font-size: 24px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+      &:hover{
+        color: ${green};
+        cursor: pointer;
+      }        
+    }
+  
+    .three{
+      background-color: ${headerWhite};
+      display: flex;
+      justify-content: space-evenly;
+      flex: 1;
+      font-size: 16px;
+      letter-spacing: 1px;
+      &:hover{
+        cursor: pointer;
+      }
+       
+      .underline{
+        color: ${green};
+        border-bottom: 5px solid ${green};
+      }  
+
+      div{
+        display: flex;
+        align-items: center;
+        width: 33.33%;
+        height: 100%;
+        margin-right: 20px;
+        &:hover{
+        color: ${green};
+        border-bottom: 5px solid ${green};
+        }
+      }  
+    }
+
+    .member{
+      background-color: ${headerWhite};
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      flex: 1;
+      border-left: 1px solid #C2C2A3;
+      padding-left: 10px;
+      font-size: 14px;
+      span{
+        margin-left: 5px;
+      &:hover{
+        color: ${green};
+        text-decoration: underline;
+        cursor: pointer;
+      }  
+      }
+    }
  
-.list-container{
-  width: 1400px;
+    .green{
+      display: flex;
+      flex: 1;      
+      background-color: ${green};
+      div{
+        display: flex;
+        justify-content: center;
+        align-items: center;      
+        font-size: 24px;
+        color: white;
+        width: 80px;
+        &:hover{
+        background-color: ${darkGreen};
+        cursor: pointer;
+        }
+      }
+    }
+
+    .normal{
+      flex-grow: 7;
+      flex-shrink: 1;
+      flex-basis: 0%;
+    }
+
+    .small{
+      flex-grow: 4;
+      flex-shrink: 1;
+      flex-basis: 0%;
+    }
+}
+ 
+.search{
+  margin: 30px;
+  height: 60px;
+  display: flex;
+
+  div{
+    width: 100%;
+    display: flex;  
+    justify-content: center;
+
+    input{
+      width: 1100px;
+      height: 50px;
+      font-size: 20px;
+      border: 1px solid ${borderGray};
+      padding-left: 18px;
+    }
+    div{
+      width: 80px;
+      height: 50px;
+      background-color: ${backgroundGray};
+      border: 1px solid ${borderGray};
+      font-weight: 600;
+      color: ${black};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  } 
+}
+
+.fake-button{
+  width: 1200px;
+  display:flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  &:hover{
+    cursor: pointer;
+  }
+
+  div{
+    width: 270px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .button1{
+    color: white;
+    border: 2px solid ${green}; 
+    background-color: ${green};
+  }
+
+  .button{
+    color: ${green}; 
+    border: 2px solid ${green}; 
+    &:hover{
+      color: white;
+      background-color: ${green};      
+    }
+  }
+
+  .button4{
+    color: ${black}; 
+    background-color: ${backgroundGray};
+    border: 1px solid ${borderGray}; 
+  }
+}
+
+.content-left-right{
+  width: 1200px;
+  display: flex;
+
+  .left{
+  display: flex;
+  flex-direction: column;
+  }
+
+  .right{
+  width: 1200px;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  }
+}
+
+.content-left-right{
+  margin: 25px auto;
+
+  div{
+    border: 1px solid red;
+  }
 }
 
 
+.jobbe{
+  width: 100%;
+  height: 100px;
+  background-color: ${green};
+  color: ${footerBlack};
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer{
+  width: 100%;
+  height: 448px;
+  color: ${footerGray};
+  background-color: ${footerBlack};
+
+  .footer{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 25px 0;
+    display: flex;
+
+
+    div{
+      width: 300px;
+    }
+
+    .footer-title{
+      padding-left: 10px;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      width: 240px;
+      font-size: 20px;
+      border-bottom: 1px solid ${footerGray};
+    }
+
+    .om-norge{
+      div{
+        padding-left: 10px;
+        margin: 20px 0 5px 0;
+        height: 30px;
+        color: ${green};
+        &:hover{
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .kontakt{
+        padding: 10px 0;
+      p{
+        margin: 5px 0;
+        padding-left: 10px;
+      }
+      span{
+        &:hover{
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    } 
+    
+    .kontakt-oss{
+      padding: 10px 0 10px 10px;
+      color: ${green};
+      &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }  
+    }
+
+    .app-text{
+      padding: 5px 0 10px 10px;
+      line-height: 2.0;
+    }
+
+    .apple,.google{
+      padding: 5px 0 0 10px;
+      height: 45px;
+      img{
+        height: 90%;
+        width: auto;
+        border-radius: 10px;
+        &:hover{
+          cursor: pointer;
+        }
+      } 
+    }
+
+    .follow{
+      margin-top: 20px;
+      padding: 10px 0 10px 10px;
+    }
+
+    .icon{
+      display: flex;
+      padding: 10px 0 10px 10px;
+      height: 300px;
+
+      div{
+      margin: 20px 25px 0 0;
+      font-size: 30px;
+      width: 30px;
+      height: 30px; 
+        &:hover{
+          color: ${backgroundGray};
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
 `
 
 StyledApp.displayName = 'App'
