@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars, faThumbtack, faHashtag, faAppleAlt, faCube} from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars, faThumbtack, faHashtag, faAppleAlt, faCube, faArrowUp} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import CountyOption from './components/CountyOption'
@@ -29,6 +29,7 @@ const location = <FontAwesomeIcon icon={faThumbtack} />
 const hashtag = <FontAwesomeIcon icon={faHashtag} />
 const appleAlt = <FontAwesomeIcon icon={faAppleAlt} />
 const cube = <FontAwesomeIcon icon={faCube} />
+const toTop = <FontAwesomeIcon icon={faArrowUp} />
 
 //images
 const apple = require('../src/images/apple.png')
@@ -80,13 +81,10 @@ const App = ({className}) => {
 
   return (
   <div className={className}>
-  
+  <a name="top"></a> 
 
     <header>
-    <a name="top"></a> 
     <div className='title normal'>{select}</div> 
-
-
 
     <div className='three normal'>
       <div className='underline'>{map}FINN  BUTIKK</div>
@@ -215,7 +213,7 @@ const App = ({className}) => {
   
       </div> 
     </footer>
-
+    <div className='toTop'><a href="#top">{toTop}</a></div>
   </div>
  )
 }
@@ -405,8 +403,13 @@ header{
 }
 
 .content-left-right{
+  margin: 25px auto;
   width: 1200px;
   display: flex;
+
+  div{
+  border: 1px solid red;
+  }
 
   .left{
   display: flex;
@@ -420,15 +423,6 @@ header{
   margin: 0 auto;
   }
 }
-
-.content-left-right{
-  margin: 25px auto;
-
-  div{
-    border: 1px solid red;
-  }
-}
-
 
 .jobbe{
   width: 100%;
@@ -544,6 +538,20 @@ footer{
     }
   }
 }
+
+.toTop{
+  font-size: 48px;
+  color: ${green};
+  font-weight: 700;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
 `
 
 StyledApp.displayName = 'App'
