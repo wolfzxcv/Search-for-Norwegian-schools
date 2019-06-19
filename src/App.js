@@ -90,13 +90,13 @@ const App = ({className}) => {
     <div className='three normal'>
 
       <a href="https://www.linkedin.com/in/nien-ying-chou-169604186/" target="_blank">
-      <div className='underline'>{map}LinkedIn</div></a>
+      <div className='underline'>{map} LinkedIn</div></a>
     
       <a href="https://github.com/wolfzxcv" target="_blank">
-      <div>{fork}GitHub</div></a>
+      <div>{fork} GitHub</div></a>
 
       <a href="https://codepen.io/nienyingchou/" target="_blank">
-      <div>{leaf}CodePen</div></a>  
+      <div>{leaf} CodePen</div></a>  
 
     </div> 
 
@@ -244,7 +244,8 @@ header{
 
     .title{
       background-color: ${headerWhite};
-      padding: 0 50px;
+      width: 340px;
+      padding: 0 20px;
       font-size: 22px;
       display: flex;
       justify-content: flex-end;
@@ -275,7 +276,7 @@ header{
       div{
         display: flex;
         align-items: center;
-        width: 148px;
+        width: 140px;
         height: 100%;
         margin-right: 20px;
         &:hover{
@@ -287,6 +288,7 @@ header{
 
     .member{
       background-color: ${headerWhite};
+      width: 210px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
