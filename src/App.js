@@ -39,7 +39,7 @@ const App = ({className}) => {
   const [data, setData] = useState([])  
   const [county, setCounty] = useState([]) 
   const [input, setInput] = useState('')
-  const [select, setSelect] = useState('Choose a county')
+  const [select, setSelect] = useState('Choose a county from left hand nav bar')
 
   useEffect( () =>{      
     async function fetchData(){
@@ -74,13 +74,11 @@ const App = ({className}) => {
   const getCounty = Object.keys(filterCountyList).sort()
 
   //print out each county's school info
-  const resultArr = mergeData.filter( x=> select.includes(x.Navn))
-  console.log(resultArr)
+  const resultArr = mergeData.filter( x=> select.includes(x.Navn)) 
+  console.log(resultArr) 
 
-  const handleChange = value =>{
-    setSelect(value)
-  }
-
+  //when choose(click) the county name, chaging the filter condition(so triger the resultArr, render the list)
+  const handleChange = value =>{ setSelect(value) }
 
   return (
   <div className={className}>
@@ -90,20 +88,31 @@ const App = ({className}) => {
     <div className='title normal'>{select}</div> 
 
     <div className='three normal'>
-      <div className='underline'>{map}FINN  BUTIKK</div>
-      <div>{fork}OPPSKRIFTER</div>
-      <div>{leaf}VÅRT  ANSVAR</div>  
+
+      <a href="https://www.linkedin.com/in/nien-ying-chou-169604186/" target="_blank">
+      <div className='underline'>{map}LinkedIn</div></a>
+    
+      <a href="https://github.com/wolfzxcv" target="_blank">
+      <div>{fork}GitHub</div></a>
+
+      <a href="https://codepen.io/nienyingchou/" target="_blank">
+      <div>{leaf}CodePen</div></a>  
+
     </div> 
 
 
     <div className='member small'>
-      <div>{lock}<span>Logg  inn</span></div>
-      <div>{user}<span>Bli  Norge  PLUSS-kunde</span></div>
+      <a href="https://www.youtube.com/user/wolfzxcvb/videos?view_as=subscriber" target="_blank">
+      <div>{lock}<span>Logg  inn</span></div></a>
+      <a href="https://www.youtube.com/user/naomichou/videos?view_as=subscriber" target="_blank">
+      <div>{user}<span>Bli  Norge  PLUSS-kunde</span></div></a>
     </div>
-
+    
     <div className='green normal'>
-      <div>{search}</div>
-      <div>{bars}</div>
+      <a href="https://www.facebook.com/wolfzxcv" target="_blank">
+      <div>{search}</div></a>
+      <a href="https://www.instagram.com/nienyingchou/" target="_blank">
+      <div>{bars}</div></a>
     </div>
 
     </header>
@@ -113,7 +122,7 @@ const App = ({className}) => {
       <div>
       <input type="text" value={input} 
              placeholder='Skolens navn'
-             onChange={ e=> setInput(e.target.value)}
+             onChange={ e=> {setInput(e.target.value)} }
       />
       <div>SØK</div>
       </div>  
@@ -192,8 +201,8 @@ const App = ({className}) => {
             <div className='app-text'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit Libero fugiat Aperiam impedit velit odit!
             </div>  
-            <div className='apple'><img src={apple} /></div>
-            <div className='google'><img src={google} /></div>          
+            <div className='apple'><img src={apple} alt='apple' /></div>
+            <div className='google'><img src={google} alt='google' /></div>          
         </div>
 
         <div>
@@ -219,6 +228,10 @@ App.propTypes = {
 
 const StyledApp = styled(App)` 
 font-family: sans-serif;
+a{
+  text-decoration: none;
+  color: inherit;
+}
 
 header{
   width: 100vw;
@@ -232,7 +245,7 @@ header{
     .title{
       background-color: ${headerWhite};
       padding: 0 50px;
-      font-size: 24px;
+      font-size: 22px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -262,7 +275,7 @@ header{
       div{
         display: flex;
         align-items: center;
-        width: 33.33%;
+        width: 148px;
         height: 100%;
         margin-right: 20px;
         &:hover{
@@ -302,6 +315,7 @@ header{
         font-size: 24px;
         color: white;
         width: 80px;
+        height: 79px;
         &:hover{
         background-color: ${darkGreen};
         cursor: pointer;
