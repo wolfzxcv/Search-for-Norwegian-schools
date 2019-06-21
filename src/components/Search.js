@@ -1,15 +1,17 @@
-import React, {useState}from 'react'
+import React,  {useContext} from 'react'
+import { SharedContext } from '../contexts/SharedContext'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Search = ({className}) => {
-  const [input, setInput] = useState('')
+  const {setInput} = useContext(SharedContext)
+
   return (
     <div className={className}>
       <div>
-      <input type="text" value={input} 
+      <input type="text" 
              placeholder='Skolens navn'
-             onChange={ e=> {setInput(e.target.value)} }
+             onChange={ e=> {setInput(e.target.value.toLowerCase())} }
       />
       <div>SØK</div>
       </div>  

@@ -10,6 +10,7 @@ const MainContent = ({className}) => {
   const [county, setCounty] = useState([]) 
   const {select, setSelect} = useContext(SharedContext)
   const {toggle} = useContext(SharedContext)
+  const {input} = useContext(SharedContext)
 
   useEffect( () =>{      
     async function fetchData(){
@@ -44,13 +45,26 @@ const MainContent = ({className}) => {
 
   //print out each county's school info
 
-  let resultArr 
-  if(toggle){
-  resultArr = mergeData.filter( x=> select.includes(x.Navn)).sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) ) 
-  console.log(resultArr)
+  let resultArr
+  if(toggle && input.trim().length===0 ){
+    resultArr = mergeData
+    .filter( x=> x.Navn.includes(select))
+    .sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) ) 
+  }else if(toggle===false && input.trim().length===0 ){
+    resultArr = mergeData
+    .filter( x=> x.Navn.includes(select))
+    .sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) ) 
+  }else if(toggle && input.trim().length>0 ){
+    resultArr = mergeData
+    .filter( x=> x.Navn.includes(select))
+    .filter( x=> x.FulltNavn.toLowerCase().includes(input))
+    .sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) )  
   }else{
-  resultArr = mergeData.filter( x=> select.includes(x.Navn)).sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) ) 
-  } 
+    resultArr = mergeData
+    .filter( x=> x.Navn.includes(select))
+    .filter( x=> x.FulltNavn.toLowerCase().includes(input))
+    .sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) )   
+  }
 
   //when choose(click) the county name, chaging the filter condition(so triger the resultArr, render the list)
   const handleChange = value =>{ setSelect(value) }
