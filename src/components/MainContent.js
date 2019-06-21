@@ -11,6 +11,7 @@ const MainContent = ({className}) => {
   const {select, setSelect} = useContext(SharedContext)
   const {toggle} = useContext(SharedContext)
   const {input} = useContext(SharedContext)
+  const [page, setPage] = React.useState(0)
 
   useEffect( () =>{      
     async function fetchData(){
@@ -43,8 +44,7 @@ const MainContent = ({className}) => {
 
   const getCounty = Object.keys(filterCountyList).sort()
 
-  //print out each county's school info
-
+  //print out each county's school info + dymanic filter condition
   let resultArr
   if(toggle && input.trim().length===0 ){
     resultArr = mergeData
@@ -58,16 +58,20 @@ const MainContent = ({className}) => {
     resultArr = mergeData
     .filter( x=> x.Navn.includes(select))
     .filter( x=> x.FulltNavn.toLowerCase().includes(input))
-    .sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) )  
+    .sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) ) 
   }else{
     resultArr = mergeData
     .filter( x=> x.Navn.includes(select))
     .filter( x=> x.FulltNavn.toLowerCase().includes(input))
-    .sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) )   
+    .sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) ) 
   }
 
   //when choose(click) the county name, chaging the filter condition(so triger the resultArr, render the list)
   const handleChange = value =>{ setSelect(value) }
+
+  //pagination 40 data per page
+  const pages = resultArr.length / 40
+
 
   return (
     <div className={className}>
@@ -82,7 +86,9 @@ const MainContent = ({className}) => {
     </div>
   
     <div className='right'>
-    {resultArr.map( list =>
+    {resultArr
+    .slice(40 * page, 40 * (page + 1))
+    .map( list =>
     <List
     key={list.OrgNr}
     id={list.OrgNr}
@@ -93,6 +99,16 @@ const MainContent = ({className}) => {
     type={list.ErOffentligSkole ? 'Public': 'Private'}
     basic={list.ErGrunnSkole ? 'True' : 'False'}
     />)}
+    </div>
+
+    <div className='pagination'>
+    {page < pages &&
+      page !== 0 && <div onClick={() => setPage(curr => curr - 1)}>
+      prev</div>}   
+    { resultArr.length !==0 &&  <div>{ page +1 }</div>}
+    {pages > page + 1 && (
+      <div onClick={() => setPage(curr => curr + 1)}>next</div>
+    )}
     </div>
   </div>
   )
@@ -118,6 +134,22 @@ width: 82%;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
+}
+
+.pagination{
+display: flex;
+font-size: 28px;
+font-weight: 500;
+position: fixed;
+bottom: 150px;
+right: 30px;
+div{
+  margin: 10px;
+  color: ${props => props.theme.colors.black};
+  background-color: ${props => props.theme.colors.backgroundGray}; 
+  border: 1px solid ${props => props.theme.colors.borderGray};
+  border-radius: 5px;
+}
 }
 
 `
