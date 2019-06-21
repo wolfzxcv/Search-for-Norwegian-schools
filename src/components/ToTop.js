@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
-const ToTop = () => {
+const ToTop = ({className}) => {
   return (
-    <div className='toTop'><a href="#top">
+    <div className={className}><a href="#top">
     <FontAwesomeIcon icon={faArrowUp} />
     </a></div>
   )

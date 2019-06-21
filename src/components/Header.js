@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars} from '@fortawesome/free-solid-svg-icons'
 
-
 const Header = ({className, select}) => {
   return (
     <header className={className}>
@@ -67,7 +66,7 @@ height: 79px;
 display: flex;
 flex: 1;
 color: ${props => props.theme.colors.black};
-font-weight: 100;
+font-weight: 400;
 border-bottom: 1px solid ${props => props.theme.colors.borderGray}; 
 
   .title{
@@ -90,7 +89,8 @@ border-bottom: 1px solid ${props => props.theme.colors.borderGray};
     display: flex;
     justify-content: space-evenly;
     flex: 1;
-    font-size: 16px;
+    font-size: 18px;
+    text-transform: uppercase;
     letter-spacing: 1px;
     &:hover{
       cursor: pointer;
