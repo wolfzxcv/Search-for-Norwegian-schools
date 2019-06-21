@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { SelectContext } from '../contexts/SelectContext'
 import Left from './Left'
 import List from './List'
 
 const MainContent = ({className}) => {
   const [data, setData] = useState([])  
   const [county, setCounty] = useState([]) 
-  const [select, setSelect] = useState('Choose a county from left hand nav bar')
+  const {select, setSelect} = useContext(SelectContext)
 
   useEffect( () =>{      
     async function fetchData(){

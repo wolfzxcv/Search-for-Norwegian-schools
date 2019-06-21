@@ -1,4 +1,5 @@
 import React  from 'react'
+import SelectProvider from './contexts/SelectContext'
 import GlobalStyle from './theme/globalStyle'
 import { ThemeProvider }  from 'styled-components'
 import theme from './theme/theme'
@@ -13,17 +14,20 @@ import ToTop from './components/ToTop'
 const App = () => {
   return (
   <ThemeProvider theme={theme}>  
-  <>
-  <GlobalStyle />
-    <a name="top"></a> 
-    <Header />
-    <Search />
-    <FakeButton />
-    <MainContent />
-    <Jobbe />
-    <Footer />
-    <ToTop />
-  </>
+    <SelectProvider>
+
+      <GlobalStyle />
+      <a name="top"></a> 
+      
+      <Header />
+      <Search />
+      <FakeButton />
+      <MainContent />
+      <Jobbe />
+      <Footer />
+      <ToTop />
+
+    </SelectProvider>
   </ThemeProvider>  
  )
 }

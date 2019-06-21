@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { SelectContext } from '../contexts/SelectContext'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars} from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({className, select}) => {
+const Header = ({className}) => {
+  const {select} = useContext(SelectContext)
+
   return (
     <header className={className}>
       <div className='title normal'>{select}</div> 
