@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { SelectContext } from '../contexts/SelectContext'
+import { SharedContext } from '../contexts/SharedContext'
 import Left from './Left'
 import List from './List'
 
 const MainContent = ({className}) => {
   const [data, setData] = useState([])  
   const [county, setCounty] = useState([]) 
-  const {select, setSelect} = useContext(SelectContext)
+  const {select, setSelect} = useContext(SharedContext)
+  const {toggle} = useContext(SharedContext)
 
   useEffect( () =>{      
     async function fetchData(){
@@ -42,8 +43,14 @@ const MainContent = ({className}) => {
   const getCounty = Object.keys(filterCountyList).sort()
 
   //print out each county's school info
-  const resultArr = mergeData.filter( x=> select.includes(x.Navn)) 
-  console.log(resultArr) 
+
+  let resultArr 
+  if(toggle){
+  resultArr = mergeData.filter( x=> select.includes(x.Navn)).sort( (a,b)=> (a.FulltNavn.localeCompare(b.FulltNavn)) ) 
+  console.log(resultArr)
+  }else{
+  resultArr = mergeData.filter( x=> select.includes(x.Navn)).sort( (a,b)=> (b.FulltNavn.localeCompare(a.FulltNavn)) ) 
+  } 
 
   //when choose(click) the county name, chaging the filter condition(so triger the resultArr, render the list)
   const handleChange = value =>{ setSelect(value) }

@@ -2,10 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const black = '#404040'
+const List = ({className, countyName, fullname, email, character, type, basic}) => {
 
-
-const List = ({className, id, countyName, fullname, email, character, type, basic}) => {
   return (
     <div className={className}>
 
@@ -35,7 +33,7 @@ const StyledList = styled(List)`
   box-shadow: 0 2px 3px 3px rgba(0,0,0,0.20);
   background-color: #FFFFF0;
   font-size: 16px;
-  color: ${black};
+  color: ${props => props.theme.colors.black};
   line-height: 1.5;
 
 .countyName{

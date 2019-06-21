@@ -1,42 +1,42 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { SelectContext } from '../contexts/SelectContext'
+import { SharedContext } from '../contexts/SharedContext'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faUtensils, faLeaf, faUnlockAlt, faUser, faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
 
 const Header = ({className}) => {
-  const {select} = useContext(SelectContext)
+  const {select} = useContext(SharedContext)
 
   return (
     <header className={className}>
       <div className='title normal'>{select}</div> 
 
       <div className='three normal'>
-        <a href="https://www.linkedin.com/in/nien-ying-chou-169604186/" target="_blank">
+        <a href="https://www.linkedin.com/in/nien-ying-chou-169604186/" target="_blank" rel="noopener noreferrer">
         <div className='underline'>
         <FontAwesomeIcon icon={faMapMarkerAlt} /> 
         LinkedIn</div></a>
       
-        <a href="https://github.com/wolfzxcv" target="_blank">
+        <a href="https://github.com/wolfzxcv" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faUtensils} /> 
         GitHub</div></a>
 
-        <a href="https://codepen.io/nienyingchou/" target="_blank">
+        <a href="https://codepen.io/nienyingchou/" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faLeaf} /> 
         CodePen</div></a>  
       </div> 
 
       <div className='member small'>
-        <a href="https://www.youtube.com/user/wolfzxcvb/videos?view_as=subscriber" target="_blank">
+        <a href="https://www.youtube.com/user/wolfzxcvb/videos?view_as=subscriber" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faUnlockAlt} />
         <span>Logg  inn</span>
         </div></a>
 
-        <a href="https://www.youtube.com/user/naomichou/videos?view_as=subscriber" target="_blank">
+        <a href="https://www.youtube.com/user/naomichou/videos?view_as=subscriber" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faUser} />
         <span>Bli  Norge  PLUSS-kunde</span>
@@ -45,12 +45,12 @@ const Header = ({className}) => {
       </div>
       
       <div className='green normal'>
-        <a href="https://www.facebook.com/wolfzxcv" target="_blank">
+        <a href="https://www.facebook.com/wolfzxcv" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faSearch} />
         </div></a>
 
-        <a href="https://www.instagram.com/nienyingchou/" target="_blank">
+        <a href="https://www.instagram.com/nienyingchou/" target="_blank" rel="noopener noreferrer">
         <div>
         <FontAwesomeIcon icon={faBars} />
         </div></a>

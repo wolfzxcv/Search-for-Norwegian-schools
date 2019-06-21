@@ -1,5 +1,5 @@
 import React  from 'react'
-import SelectProvider from './contexts/SelectContext'
+import SharedProvider from './contexts/SharedContext'
 import GlobalStyle from './theme/globalStyle'
 import { ThemeProvider }  from 'styled-components'
 import theme from './theme/theme'
@@ -14,7 +14,7 @@ import ToTop from './components/ToTop'
 const App = () => {
   return (
   <ThemeProvider theme={theme}>  
-    <SelectProvider>
+    <SharedProvider>
 
       <GlobalStyle />
       <a name="top"></a> 
@@ -27,7 +27,7 @@ const App = () => {
       <Footer />
       <ToTop />
 
-    </SelectProvider>
+    </SharedProvider>
   </ThemeProvider>  
  )
 }

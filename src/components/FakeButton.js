@@ -1,15 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { SharedContext } from '../contexts/SharedContext'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 
 const FakeButton = ({className}) => {
+  const {setToggle} = useContext(SharedContext)
+
   return (
     <div className={className}>
-      <div className='button1'>ALLE BUTIKKER</div>
-      <div className='button'>SØNDAGSÅPNE BUTIKKER</div>
-      <div className='button'>KVELDSÅPNE TIL 23:00</div>
+      <div className='button1'>VIS SKOLENS NAVN</div>
+      <div onClick={ () => setToggle(true) } className='button'>FRA A TIL Z</div>
+      <div onClick={ () => setToggle(false) } className='button'>FRA Z TIL A</div>
       <div className='button4'>
       <FontAwesomeIcon icon={faThumbtack} />
       MIN POSISJON</div>
