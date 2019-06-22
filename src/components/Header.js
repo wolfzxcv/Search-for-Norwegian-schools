@@ -128,7 +128,7 @@ const StyledHeader = styled(Header)`
     flex: 1;
     &:hover {
       color: ${props => props.theme.colors.green};
-      cursor: pointer;
+      cursor: not-allowed;
     }
   }
 

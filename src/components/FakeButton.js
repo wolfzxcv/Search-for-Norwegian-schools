@@ -34,9 +34,6 @@ const StyledFakeButton = styled(FakeButton)`
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
-  &:hover {
-    cursor: pointer;
-  }
 
   div {
     width: 270px;
@@ -52,6 +49,9 @@ const StyledFakeButton = styled(FakeButton)`
     color: white;
     border: 2px solid ${props => props.theme.colors.green};
     background-color: ${props => props.theme.colors.green};
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   .button {
@@ -60,6 +60,7 @@ const StyledFakeButton = styled(FakeButton)`
     &:hover {
       color: white;
       background-color: ${props => props.theme.colors.green};
+      cursor: pointer;
     }
   }
 
@@ -67,6 +68,9 @@ const StyledFakeButton = styled(FakeButton)`
     color: ${props => props.theme.colors.black};
     background-color: ${props => props.theme.colors.backgroundGray};
     border: 1px solid ${props => props.theme.colors.borderGray};
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 `;
 

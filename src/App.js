@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router';
 import SharedProvider from './contexts/SharedContext';
 import GlobalStyle from './theme/globalStyle';
 import { ThemeProvider } from 'styled-components';

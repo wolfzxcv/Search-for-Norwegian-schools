@@ -3,6 +3,7 @@ import React, { useState, createContext } from 'react';
 export const SharedContext = createContext();
 
 export default props => {
+  const [mergeData, setMergeData] = useState([]);
   const [select, setSelect] = useState(
     'Choose a county from left hand nav bar'
   );
@@ -11,6 +12,8 @@ export default props => {
   const [page, setPage] = useState(0);
 
   const value = {
+    mergeData,
+    setMergeData,
     select,
     setSelect,
     toggle,

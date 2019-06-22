@@ -57,7 +57,7 @@ const StyledSearch = styled(Search)`
       justify-content: center;
       align-items: center;
       &:hover {
-        cursor: pointer;
+        cursor: not-allowed;
       }
     }
   }

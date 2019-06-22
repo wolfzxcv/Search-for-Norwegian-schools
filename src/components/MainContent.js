@@ -1,16 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter as Router } from 'react-router';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SharedContext } from '../contexts/SharedContext';
 import Left from './Left';
 import List from './List';
+import Favorite from './Favorite';
 
 const MainContent = ({ className }) => {
-  const [mergeData, setMergeData] = useState([]);
-  const { select, setSelect, toggle, input, page, setPage } = useContext(
-    SharedContext
-  );
+  const {
+    select,
+    setSelect,
+    toggle,
+    input,
+    page,
+    setPage,
+    mergeData,
+    setMergeData,
+  } = useContext(SharedContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -80,6 +86,7 @@ const MainContent = ({ className }) => {
       return x;
     });
     setMergeData(newData);
+    console.log(`from merge data`, newData.filter(x => x.OrgNr === id));
   };
 
   return (
@@ -123,6 +130,17 @@ const MainContent = ({ className }) => {
           <div onClick={() => setPage(curr => curr + 1)}>next</div>
         )}
       </div>
+
+      {mergeData
+        .filter(x => x.isFavorite === true)
+        .map(x => (
+          <Favorite
+            key={x.OrgNr}
+            id={x.OrgNr}
+            favorite={x.isFavorite}
+            markFavo={markFavo}
+          />
+        ))}
     </div>
   );
 };

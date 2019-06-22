@@ -117,7 +117,7 @@ const StyledFooter = styled(Footer)`
         color: ${props => props.theme.colors.green};
         &:hover {
           text-decoration: underline;
-          cursor: pointer;
+          cursor: not-allowed;
         }
       }
     }
@@ -131,7 +131,7 @@ const StyledFooter = styled(Footer)`
       span {
         &:hover {
           text-decoration: underline;
-          cursor: pointer;
+          cursor: not-allowed;
         }
       }
     }
@@ -141,7 +141,7 @@ const StyledFooter = styled(Footer)`
       color: ${props => props.theme.colors.green};
       &:hover {
         text-decoration: underline;
-        cursor: pointer;
+        cursor: not-allowed;
       }
     }
 
@@ -159,7 +159,7 @@ const StyledFooter = styled(Footer)`
         width: auto;
         border-radius: 10px;
         &:hover {
-          cursor: pointer;
+          cursor: not-allowed;
         }
       }
     }
@@ -181,7 +181,7 @@ const StyledFooter = styled(Footer)`
         height: 30px;
         &:hover {
           color: ${props => props.theme.colors.backgroundGray};
-          cursor: pointer;
+          cursor: not-allowed;
         }
       }
     }
