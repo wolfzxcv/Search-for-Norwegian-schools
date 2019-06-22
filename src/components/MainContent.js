@@ -16,6 +16,8 @@ const MainContent = ({ className }) => {
     setPage,
     mergeData,
     setMergeData,
+    showList,
+    setShowList,
   } = useContext(SharedContext);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const MainContent = ({ className }) => {
     }
 
     fetchData();
-  }, []);
+  }, [setMergeData]);
 
   // console.log('got ' + mergeData.length + ' data');
 
@@ -86,6 +88,7 @@ const MainContent = ({ className }) => {
       return x;
     });
     setMergeData(newData);
+    setShowList(showList);
     console.log(`from merge data`, newData.filter(x => x.OrgNr === id));
   };
 

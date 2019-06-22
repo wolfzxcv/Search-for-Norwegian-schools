@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SharedContext } from '../contexts/SharedContext';
@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Favorite = ({ className, favorite, markFavo, id }) => {
-  const [showList, setShowList] = useState(false);
-  const { mergeData } = useContext(SharedContext);
+  const { mergeData, showList, setShowList } = useContext(SharedContext);
 
   const showResult = mergeData
     .filter(x => x.isFavorite === true)
@@ -29,14 +28,13 @@ const Favorite = ({ className, favorite, markFavo, id }) => {
     ));
 
   console.log(`showList boolean= `, showList);
-  console.log(`showResult: `, showResult);
 
   return (
-    <div className={className} showList={showList}>
+    <div className={className}>
       <div className="toggle-list" onClick={() => setShowList(!showList)}>
         My favorite list
       </div>
-      <div className="favo-list">{showList && showResult}</div>
+      <div className="favo-list">{showList === true && showResult}</div>
     </div>
   );
 };

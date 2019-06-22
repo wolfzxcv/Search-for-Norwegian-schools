@@ -10,6 +10,7 @@ export default props => {
   const [toggle, setToggle] = useState(true);
   const [input, setInput] = useState('');
   const [page, setPage] = useState(0);
+  const [showList, setShowList] = useState(false);
 
   const value = {
     mergeData,
@@ -22,6 +23,8 @@ export default props => {
     setInput,
     page,
     setPage,
+    showList,
+    setShowList,
   };
 
   // const value = useMemo(() => {
