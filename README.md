@@ -3,4 +3,4 @@
 
 npm i => npm start
 
-preview on CodeSandbox https://662b8.codesandbox.io/
+preview on CodeSandbox https://react-fetch-filter.herokuapp.com/
