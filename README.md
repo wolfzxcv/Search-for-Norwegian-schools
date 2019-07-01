@@ -1,4 +1,4 @@
-//  haven't finished yet
+//  React dymanic filter
 // !important;  layout is originally from https://kiwi.no/Finn-butikk/ , I just simulate it to practice CSS. 
 
 npm i => npm start
