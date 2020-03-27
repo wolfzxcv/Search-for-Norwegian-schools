@@ -7,5 +7,4 @@ when the side bar appears, click on the county name, then you can type words to 
 <br>
 npm i => npm start<br>
 demo https://wolfzxcv.github.io/Search-for-Norwegian-schools/ <br>
-Heroku https://react-fetch-filter.herokuapp.com/<br>
 CodeSandbox https://662b8.codesandbox.io/<br>
